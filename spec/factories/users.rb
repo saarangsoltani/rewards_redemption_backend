@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :user do
-    email { "MyString" }
-    password_digest { "MyString" }
-    rewards_points_balance { 1 }
+    email { Faker::Internet.unique.email(domain: "thanx.com") }
+    password { "pass1234" }
+    rewards_points_balance { 500 }
   end
 end
