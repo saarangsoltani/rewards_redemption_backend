@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_02_05_171816) do
+ActiveRecord::Schema[8.0].define(version: 2026_02_05_230725) do
+  create_table "redemptions", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "reward_id", null: false
+    t.integer "points_consumed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reward_id"], name: "index_redemptions_on_reward_id"
+    t.index ["user_id"], name: "index_redemptions_on_user_id"
+  end
+
   create_table "rewards", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -29,4 +39,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_05_171816) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
+
+  add_foreign_key "redemptions", "rewards"
+  add_foreign_key "redemptions", "users"
 end
