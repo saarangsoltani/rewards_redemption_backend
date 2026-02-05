@@ -46,3 +46,5 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "faker"
 end
+
+gem "active_model_serializers", "~> 0.10.16"
