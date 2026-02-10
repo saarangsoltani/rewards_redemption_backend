@@ -273,7 +273,6 @@ RSpec.describe RedemptionService do
 
         service1.redeem
 
-        # Reload reward to get updated quantity
         reward.reload
 
         # Second redemption should fail

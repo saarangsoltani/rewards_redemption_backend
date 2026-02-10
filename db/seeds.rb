@@ -24,9 +24,9 @@ users.each do |user_data|
   if user.new_record?
     user.assign_attributes(user_data)
     user.save!
-    puts "Created user: #{user.email} with #{user.rewards_points_balance} points"
+    puts "Created user: \e[33m#{user.email}\e[0m - Reward points: #{user.rewards_points_balance} points"
   else
-  puts "User #{user.email} already exists"
+    puts "User #{user.email} already exists"
   end
 end
 
@@ -49,24 +49,17 @@ rewards = [
     qty_available: 30,
     image_url: "/images/amazon.png"
   },
-  {
-    name: "Cineplex Movie Ticket",
-    description: "Redeem for a movie experience at Cineplex theaters.",
-    points_cost: 80,
-    qty_available: 40,
-    image_url: "/images/cineplex.png"
-  },
-  {
-    name: "Starbucks Voucher",
-    description: "Get your favorite drinks and treats at Starbucks.",
+    {
+    name: "Metro Grocery Voucher",
+    description: "Shop for groceries at Metro stores across Canada.",
     points_cost: 60,
-    qty_available: 35,
-    image_url: "/images/starbucks.jpg"
+    qty_available: 45,
+    image_url: "/images/metro.png"
   },
   {
     name: "Canadian Tire Coupon",
     description: "Save on purchases at Canadian Tire stores.",
-    points_cost: 50,
+    points_cost: 400,
     qty_available: 25,
     image_url: "/images/canadian_tire.png"
   },
@@ -77,6 +70,13 @@ rewards = [
     qty_available: 20,
     image_url: "/images/hudson_bay.png"
   },
+    {
+    name: "Best Buy Gift Card",
+    description: "Electronics, appliances, and gadgets at Best Buy.",
+    points_cost: 180,
+    qty_available: 15,
+    image_url: "/images/best_buy.png"
+  },
   {
     name: "Shoppers Drug Mart Voucher",
     description: "Spend on essentials or beauty at Shoppers Drug Mart.",
@@ -85,11 +85,18 @@ rewards = [
     image_url: "/images/shoppers_drug_mart.png"
   },
   {
-    name: "Best Buy Gift Card",
-    description: "Electronics, appliances, and gadgets at Best Buy.",
-    points_cost: 180,
-    qty_available: 15,
-    image_url: "/images/best_buy.png"
+    name: "Starbucks Voucher",
+    description: "Get your favorite drinks and treats at Starbucks.",
+    points_cost: 60,
+    qty_available: 5,
+    image_url: "/images/starbucks.jpg"
+  },
+    {
+    name: "Cineplex Movie Ticket",
+    description: "Redeem for a movie experience at Cineplex theaters.",
+    points_cost: 80,
+    qty_available: 40,
+    image_url: "/images/cineplex.png"
   },
   {
     name: "Uber Ride Credit",
@@ -97,14 +104,8 @@ rewards = [
     points_cost: 120,
     qty_available: 30,
     image_url: "/images/uber.png"
-  },
-  {
-    name: "Metro Grocery Voucher",
-    description: "Shop for groceries at Metro stores across Canada.",
-    points_cost: 60,
-    qty_available: 45,
-    image_url: "/images/metro.png"
   }
+
 ]
 
 rewards.each do |reward_data|
@@ -112,8 +113,8 @@ rewards.each do |reward_data|
   if reward.new_record?
     reward.assign_attributes(reward_data)
     reward.save!
-    puts "Created reward: #{reward.name} with #{reward.points_cost} as cost in points"
+    puts "Created reward: \e[33m'#{reward.name}'\e[0m - Cost: #{reward.points_cost}"
   else
-  puts "reward #{reward.name} already exists"
+    puts "reward #{reward.name} already exists"
   end
 end
