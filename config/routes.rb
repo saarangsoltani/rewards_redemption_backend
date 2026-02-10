@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       post "auth/login", to: "auth#create"
 
       resources :rewards, only: [ :index ]
-      resources :redemptions, only: [ :create ]
+      resources :redemptions, only: [ :create, :index ]
     end
   end
 end

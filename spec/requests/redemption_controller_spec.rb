@@ -8,6 +8,50 @@ RSpec.describe Api::V1::RedemptionsController, type: :request do
     allow_any_instance_of(Api::V1::RedemptionsController).to receive(:current_user).and_return(user)
   end
 
+  describe 'GET /api/v1/redemptions' do
+    let!(:user_redemption) { create(:redemption, user: user, reward: reward) }
+    let!(:other_redemption) { create(:redemption, user: create(:user)) }
+
+
+    it 'returns 200 ok' do
+      get '/api/v1/redemptions'
+
+      expect(response).to have_http_status(:ok)
+    end
+
+    it 'returns only current_user redemptions' do
+      get '/api/v1/redemptions'
+
+      json_response = JSON.parse(response.body)
+      ids = json_response.map { |item| item['id'] }
+
+
+      expect(ids).to include(user_redemption.id)
+      expect(ids).not_to include(other_redemption.id)
+    end
+
+    it 'includes redemption redeemed_at from the serializer' do
+      get '/api/v1/redemptions'
+
+      json_response = JSON.parse(response.body)
+      item = json_response.find { |entry| entry['id'] == user_redemption.id }
+
+      expect(item).to be_present
+      expect(item['redeemed_at']).to be_present
+    end
+
+    it 'includes reward virtual attributes from the serializer' do
+      get '/api/v1/redemptions'
+
+      json_response = JSON.parse(response.body)
+      item = json_response.find { |entry| entry['id'] == user_redemption.id }
+
+      expect(item).to be_present
+      expect(item['reward']).to be_present
+      expect(item['reward']).to include('available', 'image_url_full')
+    end
+  end
+
   describe 'POST /api/v1/redemptions' do
     context 'when redemption is successful' do
       it 'returns 201 created status' do
@@ -141,10 +185,10 @@ RSpec.describe Api::V1::RedemptionsController, type: :request do
         allow_any_instance_of(User).to receive(:deduct_reward_points).and_return(false)
       end
 
-      it 'returns 422 unprocessable entity status' do
+      it 'returns 422 unprocessable content status' do
         post '/api/v1/redemptions', params: { reward_id: reward.id }
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
 
       it 'returns error message' do
