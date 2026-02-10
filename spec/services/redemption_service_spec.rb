@@ -252,10 +252,11 @@ RSpec.describe RedemptionService do
   end
 
   context 'race condition protection' do
-    it 'locks the reward record' do
+    it 'locks the reward and user records' do
       service = RedemptionService.new(user, reward)
 
-      expect(reward).to receive(:with_lock).and_call_original
+      expect(reward).to receive(:lock!).and_call_original
+      expect(user).to receive(:lock!).and_call_original
       service.redeem
     end
 
