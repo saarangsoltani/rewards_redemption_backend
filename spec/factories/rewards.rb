@@ -4,6 +4,6 @@ FactoryBot.define do
     description { Faker::Lorem.sentence(word_count: 8) }
     points_cost { Faker::Number.between(from: 20, to: 200) }
     qty_available { Faker::Number.between(from: 10, to: 100) }
-    image_url { Faker::Internet.url(host: "example.com", path: "/images/starbucks.jpg") }
+    image_url {  "/images/starbucks.jpg" }
   end
 end

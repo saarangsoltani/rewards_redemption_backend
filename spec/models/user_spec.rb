@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe '#new_jwt_token' do
-    let(:user) { User.create!(email: "user@thanx.com", password: "pass1234") }
+    let(:user) { create(:user, email: "user@thanx.com", password: "pass1234") }
 
     it 'returns a valid JWT token containing the user_id' do
       token = user.new_jwt_token

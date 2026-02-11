@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::AuthController, type: :request do
-  let!(:user) { User.create!(email: "user@thanx.com", password: "pass1234") }
+  let!(:user) { create(:user, email: "user@thanx.com", password: "pass1234") }
 
   describe "POST /api/v1/auth/login" do
     context "with valid credentials" do

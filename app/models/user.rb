@@ -1,6 +1,9 @@
 class User < ApplicationRecord
   has_secure_password
 
+  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :rewards_points_balance, presence: true, numericality: { greater_than_or_equal_to: 0 }
+
   has_many :redemptions, dependent: :destroy
 
   def new_jwt_token
