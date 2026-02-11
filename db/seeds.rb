@@ -53,7 +53,7 @@ rewards = [
     name: "Metro Grocery Voucher",
     description: "Shop for groceries at Metro stores across Canada.",
     points_cost: 60,
-    qty_available: 45,
+    qty_available: 0,
     image_url: "/images/metro.png"
   },
   {
